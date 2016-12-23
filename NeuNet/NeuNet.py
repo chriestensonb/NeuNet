@@ -5,7 +5,7 @@ Created on Wed Dec 21 10:42:03 2016
 @author: buttfive
 """
 import numpy as np
-import pandas as pd
+
 
 class NeuNet:
     
@@ -57,13 +57,13 @@ class NeuNet:
             D1 = 1/(np.shape(X)[0])*Delta1 + Lambda*self.Theta[1]
             return D0,D1
         
-        def train(self,X,Y,alpha,Lambda,tol):
+        def train(self,X,Y,alpha,Lambda,tol,numIter):
             loop=0
             while(self.loss(X,Y,Lambda)>tol):
                 self.Theta[0] -= alpha*self.globalBackPropagation(X,Y,Lambda)[0]
                 self.Theta[1] -= alpha*self.globalBackPropagation(X,Y,Lambda)[1]
                 loop += 1
-                if (loop > 500):
+                if (loop > numIter):
                     return False
             return True
         
